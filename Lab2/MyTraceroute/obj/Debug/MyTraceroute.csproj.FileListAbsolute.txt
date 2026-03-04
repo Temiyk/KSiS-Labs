@@ -1,0 +1,7 @@
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\bin\Debug\MyTraceroute.exe.config
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\bin\Debug\MyTraceroute.exe
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\bin\Debug\MyTraceroute.pdb
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\obj\Debug\MyTraceroute.csproj.AssemblyReference.cache
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\obj\Debug\MyTraceroute.csproj.CoreCompileInputs.cache
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\obj\Debug\MyTraceroute.exe
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab2\MyTraceroute\obj\Debug\MyTraceroute.pdb
