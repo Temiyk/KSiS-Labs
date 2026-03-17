@@ -38,12 +38,10 @@ namespace Lab3_Server
             Console.WriteLine($"\n[Сервер запущен] Ожидание подключений на {serverIp}:{_tcpPort}");
             Console.WriteLine($"[UDP Уведомления] Будут рассылаться на порт {_udpPort}");
 
-            // Главный цикл: ожидание новых клиентов
             while (true)
             {
                 TcpClient client = await tcpListener.AcceptTcpClientAsync();
 
-                // Запускаем обслуживание клиента в отдельном потоке, чтобы не блокировать сервер
                 _ = Task.Run(() => HandleClientAsync(client));
             }
         }
@@ -76,12 +74,10 @@ namespace Lab3_Server
             catch (Exception ) { }
             finally 
             {
-                // Обработка отключения
                 _clients.TryRemove(clientEndPoint, out _);
                 client.Close();
                 Console.WriteLine($"[Отключение] {clientEndPoint} покинул чат.");
 
-                // Отправляем всем UDP-уведомление об отключении
                 SendUdpNotification($"Участник покинул чат: {clientIp}");
             }
         }
@@ -91,13 +87,13 @@ namespace Lab3_Server
             byte[] data = Encoding.UTF8.GetBytes(message);
             foreach (var client in _clients)
             {
-                if (client.Key != senderEndPoint) // Не отправляем сообщение самому себе
+                if (client.Key != senderEndPoint) 
                 {
                     try
                     {
                         client.Value.GetStream().Write(data, 0, data.Length);
                     }
-                    catch { /* Если клиент отвалился в процессе, игнорируем */ }
+                    catch { }
                 }
             }
         }
@@ -108,7 +104,6 @@ namespace Lab3_Server
             {
                 byte[] data = Encoding.UTF8.GetBytes(message);
 
-                // Собираем уникальные IP-адреса из списка клиентов
                 var uniqueIps = _clients.Values
                     .Select(c => ((IPEndPoint)c.Client.RemoteEndPoint).Address)
                     .Distinct();
@@ -120,7 +115,7 @@ namespace Lab3_Server
                         IPEndPoint endPoint = new IPEndPoint(ip, _udpPort);
                         udpClient.Send(data, data.Length, endPoint);
                     }
-                    catch { /* Игнорируем сетевые ошибки отправки UDP */ }
+                    catch {  }
                 }
             }
         }

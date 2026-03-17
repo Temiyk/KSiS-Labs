@@ -53,11 +53,11 @@ namespace Lab3_Client
                     string input = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(input)) continue;
 
-                    // Прикрепляем имя пользователя к сообщению
+                    
                     string fullMessage = $"{userName}: {input}";
                     byte[] data = Encoding.UTF8.GetBytes(fullMessage);
 
-                    // Отправляем на сервер
+                    
                     await stream.WriteAsync(data, 0, data.Length);
                 }
 
@@ -84,7 +84,7 @@ namespace Lab3_Client
                     if (bytesRead == 0)
                     {
                         Console.WriteLine("\n[Система] Сервер закрыл соединение.");
-                        break; // Выход из цикла, если сервер отключился
+                        break; 
                     }
 
                     string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
@@ -97,7 +97,6 @@ namespace Lab3_Client
             }
         }
 
-        // Метод для приема системных уведомлений (UDP)
         private static async Task ReceiveUdpNotifications(UdpClient udpClient)
         {
             try
@@ -111,7 +110,6 @@ namespace Lab3_Client
             }
             catch
             {
-                // Игнорируем ошибки при штатном закрытии программы
             }
         }
     }
