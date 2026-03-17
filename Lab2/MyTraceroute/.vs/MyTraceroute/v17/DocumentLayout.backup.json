@@ -10,11 +10,8 @@
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|MyTraceroute||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE0CD084-77B3-4127-8FB8-5DCFAC16450F}|MyTraceroute.csproj|c:\\users\\artyom\\desktop\\\u0431\u0433\u0443\u0438\u0440\\\u043A\u0441\u0438\u0441\\ksis labs\\lab2\\mytraceroute\\app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{CE0CD084-77B3-4127-8FB8-5DCFAC16450F}|MyTraceroute.csproj|C:\\Users\\Artyom\\Desktop\\\u0411\u0413\u0423\u0418\u0420\\\u041A\u0421\u0438\u0421\\KSiS Labs\\Lab2\\MyTraceroute\\app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{CE0CD084-77B3-4127-8FB8-5DCFAC16450F}|MyTraceroute.csproj|solutionrelative:app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CE0CD084-77B3-4127-8FB8-5DCFAC16450F}|MyTraceroute.csproj|c:\\users\\artyom\\desktop\\\u0431\u0433\u0443\u0438\u0440\\\u043A\u0441\u0438\u0441\\ksis labs\\lab2\\mytraceroute\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,7 +21,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -51,7 +48,19 @@
               "ToolTip": "C:\\Users\\Artyom\\Desktop\\\u0411\u0413\u0423\u0418\u0420\\\u041A\u0421\u0438\u0421\\KSiS Labs\\Lab2\\MyTraceroute\\MyTraceroute.csproj*",
               "RelativeToolTip": "MyTraceroute.csproj*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-04T13:40:11.404Z",
+              "WhenOpened": "2026-03-04T13:40:11.404Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Artyom\\Desktop\\\u0411\u0413\u0423\u0418\u0420\\\u041A\u0421\u0438\u0421\\KSiS Labs\\Lab2\\MyTraceroute\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Artyom\\Desktop\\\u0411\u0413\u0423\u0418\u0420\\\u041A\u0421\u0438\u0421\\KSiS Labs\\Lab2\\MyTraceroute\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAkwO8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T12:18:15.466Z",
               "EditorCaption": ""
             },
             {
@@ -64,21 +73,7 @@
               "RelativeToolTip": "app.manifest",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001203|",
-              "WhenOpened": "2026-03-04T13:38:37.881Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Artyom\\Desktop\\\u0411\u0413\u0423\u0418\u0420\\\u041A\u0421\u0438\u0421\\KSiS Labs\\Lab2\\MyTraceroute\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Artyom\\Desktop\\\u0411\u0413\u0423\u0418\u0420\\\u041A\u0421\u0438\u0421\\KSiS Labs\\Lab2\\MyTraceroute\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAM0AAAAAAAAAAAAwwO4AAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-04T12:18:15.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-04T13:38:37.881Z"
             }
           ]
         }

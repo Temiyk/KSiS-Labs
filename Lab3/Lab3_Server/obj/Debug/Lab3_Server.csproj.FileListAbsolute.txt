@@ -1,0 +1,8 @@
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\bin\Debug\Lab3_Server.exe.config
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\bin\Debug\Lab3_Server.exe
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\bin\Debug\Lab3_Server.pdb
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\obj\Debug\Lab3_Server.csproj.AssemblyReference.cache
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\obj\Debug\Lab3_Server.csproj.CoreCompileInputs.cache
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\obj\Debug\Lab3_Server.exe
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\obj\Debug\Lab3_Server.pdb
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab3\Lab3_Server\obj\Debug\Lab3_Server.exe.config
