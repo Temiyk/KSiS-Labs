@@ -14,31 +14,39 @@ namespace Lab3_Client
 
             Console.Write("Введите ваш никнейм: ");
             string userName = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(userName)) userName = "Аноним";
 
-            Console.Write("Введите ваш IP-адрес (пример: 127.0.0.1): ");
-            IPAddress localIp = IPAddress.Parse(Console.ReadLine());
+            IPAddress localIp = GetValidIpAddress("Введите ваш ЛОКАЛЬНЫЙ IP-адрес (пример: 127.0.0.2): ");
+            int localTcpPort = GetValidPort("Введите ваш ЛОКАЛЬНЫЙ TCP-порт (или 0 для автоматического выбора): ", true);
+            int localUdpPort = GetValidPort("Введите UDP-порт для получения уведомлений (должен совпадать с UDP сервера): ");
 
-            Console.Write("Введите IP-адрес сервера (пример: 127.0.0.1): ");
-            IPAddress serverIp = IPAddress.Parse(Console.ReadLine());
+            IPAddress serverIp = GetValidIpAddress("Введите IP-адрес СЕРВЕРА (пример: 127.0.0.1): ");
 
-            Console.Write("Введите порт сервера: ");
-            int serverPort = int.Parse(Console.ReadLine());
+            if (localIp.Equals(serverIp))
+            {
+                Console.WriteLine("\n[Ошибка] Ваш локальный IP-адрес не может совпадать с IP-адресом сервера!");
+                Console.WriteLine("Подсказка: Для тестирования на одном ПК используйте разные адреса.");
+                Console.WriteLine("Например: Сервер -> 127.0.0.1, Клиент -> 127.0.0.2");
+                Console.WriteLine("\nНажмите Enter для выхода...");
+                Console.ReadLine();
+                return; 
+            }
 
-            int udpPort = serverPort + 1;
+            int serverPort = GetValidPort("Введите TCP-порт СЕРВЕРА: ");
 
             TcpClient tcpClient = null;
             UdpClient udpClient = null;
 
             try
             {
-                IPEndPoint localEndPoint = new IPEndPoint(localIp, 0);
+                IPEndPoint localEndPoint = new IPEndPoint(localIp, localTcpPort);
                 tcpClient = new TcpClient(localEndPoint);
 
-                Console.WriteLine("Подключение к серверу...");
+                Console.WriteLine("\nПодключение к серверу...");
                 await tcpClient.ConnectAsync(serverIp, serverPort);
                 Console.WriteLine("Успешно подключено!\n");
 
-                udpClient = new UdpClient(new IPEndPoint(localIp, udpPort));
+                udpClient = new UdpClient(new IPEndPoint(localIp, localUdpPort));
 
                 NetworkStream stream = tcpClient.GetStream();
 
@@ -53,21 +61,26 @@ namespace Lab3_Client
                     string input = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(input)) continue;
 
-                    
                     string fullMessage = $"{userName}: {input}";
                     byte[] data = Encoding.UTF8.GetBytes(fullMessage);
 
-                    
                     await stream.WriteAsync(data, 0, data.Length);
                 }
 
             }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"\n[Ошибка Сети] Не удалось установить соединение или привязать порт.");
+                Console.WriteLine($"Детали: {ex.Message}");
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"\n[Ошибка] Сбой подключения: {ex.Message}");
+                Console.WriteLine($"\n[Непредвиденная ошибка]: {ex.Message}");
             }
             finally
             {
+                Console.WriteLine("\nНажмите любую клавишу для завершения работы...");
+                Console.ReadKey();
                 tcpClient?.Close();
                 udpClient?.Close();
             }
@@ -84,7 +97,7 @@ namespace Lab3_Client
                     if (bytesRead == 0)
                     {
                         Console.WriteLine("\n[Система] Сервер закрыл соединение.");
-                        break; 
+                        break;
                     }
 
                     string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
@@ -108,8 +121,36 @@ namespace Lab3_Client
                     Console.WriteLine($"\n>>> [СЕРВЕРНОЕ УВЕДОМЛЕНИЕ]: {message} <<<");
                 }
             }
-            catch
+            catch { /* Игнорируем ошибки при закрытии */ }
+        }
+
+        private static IPAddress GetValidIpAddress(string prompt)
+        {
+            while (true)
             {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (IPAddress.TryParse(input, out IPAddress ip))
+                {
+                    return ip;
+                }
+                Console.WriteLine("[Ошибка] Неверный формат IP-адреса. Попробуйте еще раз.");
+            }
+        }
+
+        private static int GetValidPort(string prompt, bool allowZero = false)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out int port))
+                {
+                    if (allowZero && port == 0) return port;
+
+                    if (port > 0 && port <= 65535) return port;
+                }
+                Console.WriteLine("[Ошибка] Порт должен быть числом от 1 до 65535. Попробуйте еще раз.");
             }
         }
     }
