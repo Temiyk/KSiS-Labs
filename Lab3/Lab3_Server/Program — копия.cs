@@ -19,30 +19,35 @@ namespace Lab3_Server
         {
             Console.WriteLine("<<< СЕРВЕР >>>");
 
-            Console.Write("Введите IP-адрес сервера (пример: 127.0.0.1): ");
-            string ipInput = Console.ReadLine();
-            IPAddress serverIp = IPAddress.Parse(ipInput);
+            IPAddress serverIp = GetValidIpAddress("Введите IP-адрес сервера (пример: 127.0.0.1): ");
+            _tcpPort = GetValidPort("Введите TCP-порт для работы чата (например, 5000): ");
+            _udpPort = GetValidPort("Введите UDP-порт для рассылки уведомлений (например, 5001): ");
 
-            Console.Write("Введите порт для работы чата: ");
-            _tcpPort = int.Parse(Console.ReadLine());
-            _udpPort = _tcpPort + 1;
-
-            if(!IsPortAvailable(_tcpPort) || !IsPortAvailable(_udpPort))
+            if (!IsPortAvailable(_tcpPort) || !IsPortAvailable(_udpPort))
             {
-                Console.WriteLine($"[Ошибка] Порт {_tcpPort} или {_udpPort} уже занят другой программой.");
+                Console.WriteLine($"\n[Ошибка] Порт {_tcpPort} или {_udpPort} уже занят другой программой.");
+                Console.WriteLine("Нажмите любую клавишу для выхода...");
+                Console.ReadKey(); 
                 return;
             }
 
             TcpListener tcpListener = new TcpListener(serverIp, _tcpPort);
-            tcpListener.Start();
-            Console.WriteLine($"\n[Сервер запущен] Ожидание подключений на {serverIp}:{_tcpPort}");
-            Console.WriteLine($"[UDP Уведомления] Будут рассылаться на порт {_udpPort}");
-
-            while (true)
+            try
             {
-                TcpClient client = await tcpListener.AcceptTcpClientAsync();
+                tcpListener.Start();
+                Console.WriteLine($"\n[Сервер запущен] Ожидание подключений на {serverIp}:{_tcpPort}");
+                Console.WriteLine($"[UDP Уведомления] Будут рассылаться на порт {_udpPort}");
 
-                _ = Task.Run(() => HandleClientAsync(client));
+                while (true)
+                {
+                    TcpClient client = await tcpListener.AcceptTcpClientAsync();
+                    _ = Task.Run(() => HandleClientAsync(client));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\n[Критическая ошибка сервера] {ex.Message}");
+                Console.ReadLine();
             }
         }
 
@@ -61,18 +66,19 @@ namespace Lab3_Server
 
             try
             {
-                while (true) { 
+                while (true)
+                {
                     int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                     if (bytesRead == 0) break;
-                    
+
                     string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     Console.WriteLine($"[TCP Сообщение от {clientEndPoint}]: {message}");
 
                     BroadcastTcpMessage(message, clientEndPoint);
                 }
             }
-            catch (Exception ) { }
-            finally 
+            catch (Exception) { /* Игнорируем ошибки при обрыве связи */ }
+            finally
             {
                 _clients.TryRemove(clientEndPoint, out _);
                 client.Close();
@@ -87,7 +93,7 @@ namespace Lab3_Server
             byte[] data = Encoding.UTF8.GetBytes(message);
             foreach (var client in _clients)
             {
-                if (client.Key != senderEndPoint) 
+                if (client.Key != senderEndPoint)
                 {
                     try
                     {
@@ -115,15 +121,16 @@ namespace Lab3_Server
                         IPEndPoint endPoint = new IPEndPoint(ip, _udpPort);
                         udpClient.Send(data, data.Length, endPoint);
                     }
-                    catch {  }
+                    catch { }
                 }
             }
         }
+
         private static bool IsPortAvailable(int port)
         {
             IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
-            TcpConnectionInformation[] tcpConnInfoArray = ipGlobalProperties.GetActiveTcpConnections();
 
+            TcpConnectionInformation[] tcpConnInfoArray = ipGlobalProperties.GetActiveTcpConnections();
             foreach (TcpConnectionInformation tcpi in tcpConnInfoArray)
             {
                 if (tcpi.LocalEndPoint.Port == port) return false;
@@ -136,6 +143,34 @@ namespace Lab3_Server
             }
 
             return true;
+        }
+
+        private static IPAddress GetValidIpAddress(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (IPAddress.TryParse(input, out IPAddress ip))
+                {
+                    return ip;
+                }
+                Console.WriteLine("[Ошибка] Неверный формат IP-адреса. Попробуйте еще раз.");
+            }
+        }
+
+        private static int GetValidPort(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out int port) && port > 0 && port <= 65535)
+                {
+                    return port;
+                }
+                Console.WriteLine("[Ошибка] Порт должен быть числом от 1 до 65535. Попробуйте еще раз.");
+            }
         }
     }
 }

@@ -1,0 +1,8 @@
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\bin\Debug\HTTP_ProxyServer.exe.config
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\bin\Debug\HTTP_ProxyServer.exe
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\bin\Debug\HTTP_ProxyServer.pdb
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\obj\Debug\HTTP_ProxyServer.csproj.AssemblyReference.cache
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\obj\Debug\HTTP_ProxyServer.csproj.CoreCompileInputs.cache
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\obj\Debug\HTTP_ProxyServer.exe
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\obj\Debug\HTTP_ProxyServer.pdb
+C:\Users\Artyom\Desktop\БГУИР\КСиС\KSiS Labs\Lab4\HTTP_ProxyServer\obj\Debug\HTTP_ProxyServer.exe.config
